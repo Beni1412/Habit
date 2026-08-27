@@ -384,3 +384,4 @@ export const ManageHabitsScreen: React.FC = () => {
     </div>
   );
 };
+
