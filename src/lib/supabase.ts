@@ -240,3 +240,37 @@ export async function fetchSupabaseLeaderboard(limit = 10) {
     return [];
   }
 }
+
+/**
+ * Fetch Full User Data on Login
+ */
+export async function fetchUserData(email: string) {
+  if (!supabase) return null;
+  try {
+    // 1. Fetch Profile
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (!profile) return null; // New user
+
+    // 2. Fetch Habits
+    const { data: habits } = await supabase
+      .from('habits')
+      .select('*')
+      .eq('user_id', profile.id);
+
+    // 3. Fetch Pets
+    const { data: pets } = await supabase
+      .from('pets')
+      .select('*')
+      .eq('user_id', profile.id);
+
+    return { profile, habits, pets };
+  } catch (err) {
+    console.warn('Supabase fetchUserData error:', err);
+    return null;
+  }
+}
