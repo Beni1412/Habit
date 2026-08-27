@@ -316,3 +316,4 @@ export const StoreScreen: React.FC = () => {
     </div>
   );
 };
+
