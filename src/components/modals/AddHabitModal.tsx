@@ -232,3 +232,4 @@ export const AddHabitModal: React.FC = () => {
     </div>
   );
 };
+
