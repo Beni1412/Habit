@@ -1,3 +1,5 @@
+// Mesin logika sistem battle.
+// Menghitung damage, elemental counter (misal: fire mengalahkan nature), multiplier XP dari streak habit, dan hasil akhir pertarungan PvE/PvP.
 import { CompanionPet, BattleOpponent, BattleSkill, PetElement } from '../types';
 
 export interface ElementalRelation {
