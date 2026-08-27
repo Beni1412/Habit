@@ -1,4 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+// Inisialisasi koneksi ke database Supabase menggunakan environment variable.
+// Berisi fungsi-fungsi untuk sinkronisasi data: profil user, habit, pet, battle log, dan leaderboard PvP.
+
 import { Habit, CompanionPet, UserProfile, BattleOpponent } from '../types';
 
 // Retrieve environment variables for Supabase
