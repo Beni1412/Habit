@@ -1,6 +1,11 @@
 // Data awal (default) untuk seluruh aplikasi.
 // Berisi data semua pet (Squirtle, Pikachu, dll), item toko, stage evolusi, dan habit contoh saat pertama kali app dibuka.
 
+import {
+  CompanionPet,
+  Habit,
+  StoreItem,
+  EvolutionStage,
   PlaytimeData,
   DuoPartner,
   UserProfile,
