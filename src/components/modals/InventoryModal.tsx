@@ -124,3 +124,4 @@ export const InventoryModal: React.FC<{ isOpen: boolean; onClose: () => void }> 
     </div>
   );
 };
+
