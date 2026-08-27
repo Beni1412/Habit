@@ -1032,3 +1032,4 @@ CREATE POLICY "Users can manage own inventory" ON public.inventory FOR ALL USING
     </div>
   );
 };
+
