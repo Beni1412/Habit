@@ -442,6 +442,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       themePreference: 'emerald',
     };
     setUser(newUser);
+    
+    // Reset other data for fresh account
+    setHabits([]);
+    setPets(INITIAL_PETS);
+    setLeafPoints(0);
+    localStorage.removeItem('habitpet_habits');
+    localStorage.removeItem('habitpet_leafpoints');
+    localStorage.removeItem('habitpet_pets');
+    
     sounds.playHabitComplete();
     triggerConfetti();
     showToast(`Account created! Welcome to HabitPet, ${name}! 🎉`);
@@ -449,10 +458,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const logout = () => {
-    setUser((prev) => ({ ...prev, isLoggedIn: false }));
-    sounds.playPop();
-    showToast('Logged out successfully.');
-    setIsProfileModalOpen(false);
+    localStorage.clear();
+    localStorage.setItem('habitpet_data_version', CURRENT_DATA_VERSION);
+    window.location.reload();
   };
 
   const updateProfile = (data: Partial<UserProfile>) => {

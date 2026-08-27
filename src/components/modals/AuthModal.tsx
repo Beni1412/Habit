@@ -217,49 +217,20 @@ export const AuthModal: React.FC = () => {
           <p className="text-[11px] font-extrabold text-[#6d7b6d] uppercase tracking-wider text-center">
             Quick Switch / Instant Demo
           </p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex justify-center">
             <button
               type="button"
               onClick={() =>
                 handleQuickLogin(
-                  'Budi Mulyawan',
-                  'bv5mulyawan@gmail.com',
-                  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'
+                  'Guest Trainer',
+                  'guest@habitpet.com',
+                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/red.png'
                 )
               }
-              className="p-2.5 rounded-xl border border-[#bccabb]/30 hover:border-[#4ade80] bg-[#f8f9ff] hover:bg-[#eff4ff] flex items-center gap-2 text-left transition-all"
+              className="w-full p-2.5 rounded-xl border border-[#bccabb]/30 hover:border-[#4ade80] bg-[#f8f9ff] hover:bg-[#eff4ff] flex items-center justify-center gap-2 transition-all"
             >
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
-                alt="Budi"
-                className="w-7 h-7 rounded-full object-cover"
-              />
-              <div className="min-w-0">
-                <p className="text-xs font-bold text-[#0d1c2e] truncate">Budi Mulyawan</p>
-                <p className="text-[10px] text-[#006d36] font-semibold">Guardian Lvl 5</p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() =>
-                handleQuickLogin(
-                  'Alex Tan',
-                  'alex.tan@habits.io',
-                  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&auto=format&fit=crop&q=80'
-                )
-              }
-              className="p-2.5 rounded-xl border border-[#bccabb]/30 hover:border-[#4ade80] bg-[#f8f9ff] hover:bg-[#eff4ff] flex items-center gap-2 text-left transition-all"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&auto=format&fit=crop&q=80"
-                alt="Alex"
-                className="w-7 h-7 rounded-full object-cover"
-              />
-              <div className="min-w-0">
-                <p className="text-xs font-bold text-[#0d1c2e] truncate">Alex Tan</p>
-                <p className="text-[10px] text-[#0060ac] font-semibold">Guardian Lvl 12</p>
-              </div>
+              <User className="w-5 h-5 text-[#006d36]" />
+              <span className="text-sm font-bold text-[#0d1c2e]">Login as Guest</span>
             </button>
           </div>
         </div>
@@ -267,4 +238,3 @@ export const AuthModal: React.FC = () => {
     </div>
   );
 };
-
