@@ -35,7 +35,7 @@ import { sounds } from '../utils/audio';
 import { getPokemonArtwork, getPokemonStageName } from '../components/pet2d/InteractivePet2D';
 import { syncUserProfile, syncHabitsToSupabase, syncPetsToSupabase, fetchUserData } from '../lib/supabase';
 
-export interface NotificationItem {
+interface NotificationItem {
   id: string;
   title: string;
   desc: string;
