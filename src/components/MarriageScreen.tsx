@@ -778,3 +778,4 @@ export const MarriageScreen: React.FC = () => {
     </div>
   );
 };
+
