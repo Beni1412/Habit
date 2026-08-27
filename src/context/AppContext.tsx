@@ -33,6 +33,7 @@ import {
 } from '../data/initialData';
 import { sounds } from '../utils/audio';
 import { getPokemonArtwork, getPokemonStageName } from '../components/pet2d/InteractivePet2D';
+import { syncUserProfile, syncHabitsToSupabase, syncPetsToSupabase } from '../lib/supabase';
 
 export interface NotificationItem {
   id: string;
@@ -345,18 +346,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     },
   ]);
 
-  // Persist to local storage
+  // Persist to local storage and Supabase
   useEffect(() => {
     localStorage.setItem('habitpet_user', JSON.stringify(user));
-  }, [user]);
+    if (user.isLoggedIn && user.id) {
+      syncUserProfile(user, leafPoints, 0, 1000);
+    }
+  }, [user, leafPoints]); // Added leafPoints as dependency for the sync
 
   useEffect(() => {
     localStorage.setItem('habitpet_pets', JSON.stringify(pets));
-  }, [pets]);
+    if (user.isLoggedIn && user.id) {
+      syncPetsToSupabase(user.id, pets);
+    }
+  }, [pets, user.isLoggedIn, user.id]);
 
   useEffect(() => {
     localStorage.setItem('habitpet_habits', JSON.stringify(habits));
-  }, [habits]);
+    if (user.isLoggedIn && user.id) {
+      syncHabitsToSupabase(user.id, habits);
+    }
+  }, [habits, user.isLoggedIn, user.id]);
 
   useEffect(() => {
     localStorage.setItem('habitpet_leafpoints', JSON.stringify(leafPoints));

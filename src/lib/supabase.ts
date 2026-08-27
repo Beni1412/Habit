@@ -2,6 +2,7 @@
 // Berisi fungsi-fungsi untuk sinkronisasi data: profil user, habit, pet, battle log, dan leaderboard PvP.
 
 import { Habit, CompanionPet, UserProfile, BattleOpponent } from '../types';
+import { createClient } from '@supabase/supabase-js';
 
 // Retrieve environment variables for Supabase
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
