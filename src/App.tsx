@@ -1,6 +1,7 @@
 // Komponen root aplikasi.
 // Mengatur navigasi antar halaman (tab) dan menampilkan semua modal global seperti login, pilih pet, dan evolusi.
 
+import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
