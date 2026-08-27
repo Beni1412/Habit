@@ -1,0 +1,7 @@
+{
+  "name": "HabitPet",
+  "description": "A gamified habit tracker where daily consistency powers 2D interactive Pokémon growth (Bulbasaur, Charmander, Squirtle, Pikachu, Gengar, Eevee, Chikorita, Lucario, Mewtwo, Rayquaza), tactile petting, authentic Pokémon multi-stage evolution sequences, dual-mode PvE Gym & PvP Trainer battle arena with elemental counter calculations, pet marriage and offspring, store rewards, and sanctuary progression.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
