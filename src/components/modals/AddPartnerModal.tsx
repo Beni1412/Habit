@@ -183,3 +183,4 @@ export const AddPartnerModal: React.FC = () => {
     </div>
   );
 };
+
