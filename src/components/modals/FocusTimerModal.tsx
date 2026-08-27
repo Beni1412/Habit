@@ -172,3 +172,4 @@ export const FocusTimerModal: React.FC = () => {
     </div>
   );
 };
+
