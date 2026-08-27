@@ -272,3 +272,4 @@ export const PetStatsScreen: React.FC = () => {
     </div>
   );
 };
+
