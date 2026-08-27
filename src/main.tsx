@@ -1,6 +1,7 @@
 // Entry point utama aplikasi React.
 // File ini me-render komponen <App /> ke dalam elemen HTML dengan id "root" di index.html.
 
+import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
