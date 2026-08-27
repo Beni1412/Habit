@@ -1,4 +1,4 @@
-// Gentle Web Audio API sound synthesizers for tactile UI feedback
+// Utilitas efek suara aplikasi. Berisi semua fungsi suara interaktif (chirp pet, makan, purr, bounce bola) menggunakan Web Audio API.
 
 class SoundEffects {
   private ctx: AudioContext | null = null;
@@ -6,6 +6,8 @@ class SoundEffects {
   private getContext(): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
+      // Utilitas efek suara aplikasi.
+      // Berisi semua fungsi suara interaktif (chirp pet, makan, purr, bounce bola, musik) yang dibuat menggunakan Web Audio API.
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
