@@ -1,4 +1,6 @@
-export type CompanionId =
+// Definisi semua tipe data TypeScript yang dipakai di seluruh aplikasi.
+// Berisi tipe untuk Pet, Habit, StoreItem, Marriage, Battle, UserProfile, dan lainnya.
+
   | 'sprout'
   | 'ember'
   | 'bubbles'
