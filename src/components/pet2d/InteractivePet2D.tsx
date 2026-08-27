@@ -258,3 +258,4 @@ export const InteractivePet2D: React.FC<InteractivePet2DProps> = ({
     </div>
   );
 };
+
