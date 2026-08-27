@@ -52,7 +52,7 @@ interface AppContextType {
   // User Profile & Authentication
   user: UserProfile;
   login: (email: string, pass: string, name?: string, avatarUrl?: string) => void;
-  signup: (name: string, email: string, pass: string, avatarUrl?: string) => void;
+  signup: (name: string, email: string, pass: string, avatarUrl?: string) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<UserProfile>) => void;
   uploadAvatar: (avatarDataUrl: string) => void;
@@ -506,7 +506,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  const signup = (name: string, email: string, _pass: string, avatarUrl?: string) => {
+  const signup = async (name: string, email: string, _pass: string, avatarUrl?: string) => {
+    // Cek dulu apakah email sudah terdaftar
+    const existing = await fetchUserData(email);
+    if (existing && existing.profile) {
+      showToast('❌ Email sudah terdaftar! Gunakan Sign In.');
+      return;
+    }
+
     const newUser: UserProfile = {
       id: `usr-${Date.now()}`,
       name,
@@ -525,19 +532,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
     setUser(newUser);
     
-    // Reset other data for fresh account
+    // Reset data untuk akun baru
     setHabits([]);
     setPets(INITIAL_PETS);
     setLeafPoints(0);
     localStorage.removeItem('habitpet_habits');
     localStorage.removeItem('habitpet_leafpoints');
     localStorage.removeItem('habitpet_pets');
+
+    // Simpan ke Supabase agar bisa login ulang nanti
+    await syncUserProfile(newUser, 0, 0, 1000);
     
     sounds.playHabitComplete();
     triggerConfetti();
     showToast(`Account created! Welcome to HabitPet, ${name}! 🎉`);
     setIsAuthModalOpen(false);
   };
+
 
   const logout = () => {
     localStorage.clear();
