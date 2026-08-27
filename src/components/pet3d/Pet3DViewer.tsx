@@ -916,3 +916,4 @@ export const Pet3DViewer: React.FC<Pet3DViewerProps> = ({
     />
   );
 };
+
