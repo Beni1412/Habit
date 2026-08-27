@@ -242,3 +242,4 @@ VALUES
     ('trainer-lucas', 'lucas@habitpet.app', 'Lucas & Blaziken', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/lucas.png', 'Habit Striker Master', 38, 2050, 840, 180),
     ('trainer-maya', 'maya@habitpet.app', 'Maya Bloom', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/dawn.png', 'Serene Flora Master', 34, 1890, 620, 150)
 ON CONFLICT (id) DO NOTHING;
+
