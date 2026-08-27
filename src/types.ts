@@ -1,6 +1,7 @@
 // Definisi semua tipe data TypeScript yang dipakai di seluruh aplikasi.
 // Berisi tipe untuk Pet, Habit, StoreItem, Marriage, Battle, UserProfile, dan lainnya.
 
+export type CompanionId =
   | 'sprout'
   | 'ember'
   | 'bubbles'
