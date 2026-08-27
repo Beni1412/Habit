@@ -33,7 +33,7 @@ import {
 } from '../data/initialData';
 import { sounds } from '../utils/audio';
 import { getPokemonArtwork, getPokemonStageName } from '../components/pet2d/InteractivePet2D';
-import { syncUserProfile, syncHabitsToSupabase, syncPetsToSupabase } from '../lib/supabase';
+import { syncUserProfile, syncHabitsToSupabase, syncPetsToSupabase, fetchUserData } from '../lib/supabase';
 
 export interface NotificationItem {
   id: string;
@@ -420,18 +420,90 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   // Auth Functions
-  const login = (email: string, _pass: string, name?: string, avatarUrl?: string) => {
-    const formattedName = name || email.split('@')[0].replace(/[._]/g, ' ') || 'Habit Master';
-    setUser((prev) => ({
-      ...prev,
-      email,
-      name: formattedName,
-      avatarUrl: avatarUrl || prev.avatarUrl,
-      isLoggedIn: true,
-    }));
-    sounds.playHabitComplete();
-    showToast(`Welcome back, ${formattedName}! ✨`);
-    setIsAuthModalOpen(false);
+  const login = async (email: string, _pass: string, name?: string, avatarUrl?: string) => {
+    showToast('Connecting to database...');
+    const dbData = await fetchUserData(email);
+
+    if (dbData && dbData.profile) {
+      const p = dbData.profile;
+      setUser({
+        id: p.id,
+        email: p.email,
+        name: p.name,
+        avatarUrl: p.avatar_url || avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+        title: p.title,
+        bio: p.bio,
+        level: p.level,
+        streakDays: p.streak_days,
+        totalHabitsCompleted: p.total_habits_completed,
+        joinDate: p.created_at ? new Date(p.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Recently',
+        isLoggedIn: true,
+        themePreference: p.theme_preference || 'emerald',
+      });
+      setLeafPoints(p.leaf_points || 0);
+
+      if (dbData.habits && dbData.habits.length > 0) {
+        const mappedHabits = dbData.habits.map((h: any) => ({
+          id: h.id,
+          name: h.name,
+          description: h.description,
+          category: h.category,
+          frequency: h.frequency,
+          difficulty: h.difficulty,
+          points: h.points,
+          targetCount: h.target_count,
+          currentCount: h.current_count,
+          unit: h.unit,
+          timeOfDay: h.time_of_day,
+          streak: h.streak,
+          completedToday: h.completed_today,
+        }));
+        setHabits(mappedHabits as Habit[]);
+      }
+
+      if (dbData.pets && dbData.pets.length > 0) {
+        const newPets = { ...INITIAL_PETS };
+        dbData.pets.forEach((petRow: any) => {
+          if (newPets[petRow.pet_id]) {
+            newPets[petRow.pet_id] = {
+              ...newPets[petRow.pet_id],
+              name: petRow.name,
+              element: petRow.element,
+              evolutionStage: petRow.evolution_stage,
+              growthLevel: petRow.growth_level,
+              currentXp: petRow.current_xp,
+              maxXp: petRow.max_xp,
+              happinessPct: petRow.happiness_pct,
+              isUnlocked: petRow.is_unlocked,
+              equippedItems: petRow.equipped_items || [],
+            };
+          }
+        });
+        setPets(newPets);
+      }
+
+      sounds.playHabitComplete();
+      showToast(`Welcome back, ${p.name}! ✨`);
+      setIsAuthModalOpen(false);
+    } else {
+      if (email === 'guest@habitpet.com') {
+        // Fallback for guest demo if not in DB yet
+        const formattedName = name || 'Guest Trainer';
+        setUser((prev) => ({
+          ...prev,
+          id: 'guest-' + Date.now(),
+          email,
+          name: formattedName,
+          avatarUrl: avatarUrl || prev.avatarUrl,
+          isLoggedIn: true,
+        }));
+        sounds.playHabitComplete();
+        showToast(`Welcome, Guest! ✨`);
+        setIsAuthModalOpen(false);
+      } else {
+        showToast('❌ Akun tidak ditemukan! Silakan Sign Up / Create Account dulu.');
+      }
+    }
   };
 
   const signup = (name: string, email: string, _pass: string, avatarUrl?: string) => {
