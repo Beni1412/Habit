@@ -14,7 +14,6 @@ import {
   Volume2,
   VolumeX,
   Cake,
-  Footprints,
   Flame,
   Star,
   Wind,
@@ -406,17 +405,7 @@ export const AnimatedPetStage: React.FC = () => {
           <div className="absolute bottom-12 left-[-5%] right-[-5%] h-28 rounded-[50%] bg-emerald-700/40 blur-xs" />
 
           {/* Foreground Lush Grass Lawn */}
-          <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#166534] via-[#15803d] to-[#22c55e] rounded-b-3xl shadow-inner flex items-end justify-between px-6 pb-2">
-            {/* Cute Garden Flowers & Plants */}
-            <div className="text-xl">🌸</div>
-            <div className="text-xl">🌼</div>
-            <div className="text-xl">🍄</div>
-            <div className="text-xl">🌷</div>
-            <div className="text-xl">🌿</div>
-            <div className="text-xl">🌻</div>
-            <div className="text-xl">🌸</div>
-            <div className="text-xl">🍀</div>
-          </div>
+          <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#166534] via-[#15803d] to-[#22c55e] rounded-b-3xl shadow-inner" />
         </div>
 
         {/* --- INTERACTIVE PET & STAGE CHARACTERS --- */}
@@ -554,53 +543,47 @@ export const AnimatedPetStage: React.FC = () => {
           )}
         </div>
 
-        {/* --- BOTTOM REAL TACTILE ACTION BUTTONS --- */}
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="relative z-30 w-full pt-3 border-t border-black/10 flex flex-wrap items-center justify-between gap-2 pointer-events-auto"
+      </div>
+
+      {/* --- ACTION BUTTONS OUTSIDE STAGE FRAME --- */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-full flex flex-wrap items-center justify-center gap-2 pt-1"
+      >
+        <button
+          onClick={() => handleDropSnack('berry')}
+          className="px-4 py-2 bg-white hover:bg-emerald-50 text-[#0d1c2e] hover:text-[#006d36] rounded-xl text-xs font-black border border-[#bccabb]/40 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
         >
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <button
-              onClick={() => handleDropSnack('berry')}
-              className="px-3 py-1.5 bg-white/90 hover:bg-emerald-50 text-[#0d1c2e] hover:text-[#006d36] rounded-xl text-xs font-black border border-white/70 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-            >
-              <Cookie className="w-3.5 h-3.5 text-[#006d36]" /> Beri Berry (🍓)
-            </button>
+          <Cookie className="w-3.5 h-3.5 text-[#006d36]" /> Beri Berry (🍓)
+        </button>
 
-            <button
-              onClick={() => handleDropSnack('cake')}
-              className="px-3 py-1.5 bg-white/90 hover:bg-pink-50 text-[#0d1c2e] hover:text-pink-600 rounded-xl text-xs font-black border border-white/70 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-            >
-              <Cake className="w-3.5 h-3.5 text-pink-600" /> Beri Kue (🍰)
-            </button>
+        <button
+          onClick={() => handleDropSnack('cake')}
+          className="px-4 py-2 bg-white hover:bg-pink-50 text-[#0d1c2e] hover:text-pink-600 rounded-xl text-xs font-black border border-[#bccabb]/40 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+        >
+          <Cake className="w-3.5 h-3.5 text-pink-600" /> Beri Kue (🍰)
+        </button>
 
-            <button
-              onClick={() => handleDropSnack('water')}
-              className="px-3 py-1.5 bg-white/90 hover:bg-blue-50 text-[#0d1c2e] hover:text-[#0060ac] rounded-xl text-xs font-black border border-white/70 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-            >
-              <Droplets className="w-3.5 h-3.5 text-[#0060ac]" /> Minum Air (💧)
-            </button>
+        <button
+          onClick={() => handleDropSnack('water')}
+          className="px-4 py-2 bg-white hover:bg-blue-50 text-[#0d1c2e] hover:text-[#0060ac] rounded-xl text-xs font-black border border-[#bccabb]/40 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+        >
+          <Droplets className="w-3.5 h-3.5 text-[#0060ac]" /> Minum Air (💧)
+        </button>
 
-            <button
-              onClick={handleThrowBall}
-              className="px-3 py-1.5 bg-white/90 hover:bg-amber-50 text-[#0d1c2e] hover:text-amber-700 rounded-xl text-xs font-black border border-white/70 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-            >
-              <Gamepad2 className="w-3.5 h-3.5 text-amber-600" /> Lempar Bola (⚽)
-            </button>
+        <button
+          onClick={handleThrowBall}
+          className="px-4 py-2 bg-white hover:bg-amber-50 text-[#0d1c2e] hover:text-amber-700 rounded-xl text-xs font-black border border-[#bccabb]/40 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+        >
+          <Gamepad2 className="w-3.5 h-3.5 text-amber-600" /> Lempar Bola (⚽)
+        </button>
 
-            <button
-              onClick={handlePetRub}
-              className="px-3 py-1.5 bg-white/90 hover:bg-rose-50 text-[#0d1c2e] hover:text-rose-600 rounded-xl text-xs font-black border border-white/70 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-            >
-              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> Elus Pet (💖)
-            </button>
-          </div>
-
-          <div className="text-[11px] font-bold text-white/90 drop-shadow-sm hidden md:flex items-center gap-1">
-            <Footprints className="w-3.5 h-3.5 text-yellow-300" />
-            Klik di rumput untuk berjalan, atau klik pet untuk mengelus!
-          </div>
-        </div>
+        <button
+          onClick={handlePetRub}
+          className="px-4 py-2 bg-white hover:bg-rose-50 text-[#0d1c2e] hover:text-rose-600 rounded-xl text-xs font-black border border-[#bccabb]/40 shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+        >
+          <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> Elus Pet (💖)
+        </button>
       </div>
     </div>
   );
